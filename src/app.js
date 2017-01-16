@@ -32,7 +32,7 @@ function processEvent(event) {
 		
 		if (text === 'adi' || text === 'Adi') {
             sendFBMessage(sender, "Pogi");
-            continue
+            continue;
         } 
 		
         let apiaiRequest = apiAiService.textRequest(text,
