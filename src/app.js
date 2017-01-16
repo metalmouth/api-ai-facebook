@@ -123,7 +123,7 @@ function chunkString(s, len) {
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: 'https://graph.facebook.com/v2.8/me/messages',
         qs: {access_token: FB_PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
@@ -141,7 +141,7 @@ function sendTextMessage(sender, text) {
 
 function sendFBMessage(sender, messageData, callback) {
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: 'https://graph.facebook.com/v2.8/me/messages',
         qs: {access_token: FB_PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
@@ -164,7 +164,7 @@ function sendFBMessage(sender, messageData, callback) {
 function sendFBSenderAction(sender, action, callback) {
     setTimeout(() => {
         request({
-            url: 'https://graph.facebook.com/v2.6/me/messages',
+            url: 'https://graph.facebook.com/v2.8/me/messages',
             qs: {access_token: FB_PAGE_ACCESS_TOKEN},
             method: 'POST',
             json: {
@@ -187,7 +187,7 @@ function sendFBSenderAction(sender, action, callback) {
 function doSubscribeRequest() {
     request({
             method: 'POST',
-            uri: "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=" + FB_PAGE_ACCESS_TOKEN
+            uri: "https://graph.facebook.com/v2.8/me/subscribed_apps?access_token=" + FB_PAGE_ACCESS_TOKEN
         },
         (error, response, body) => {
             if (error) {
@@ -241,6 +241,12 @@ app.post('/webhook/', (req, res) => {
 							
 							if (event.message.text == 'adi' || event.message.text == 'Adi') {
 								sendTextMessage(event.sender.id, "SUCCESS");
+								
+								//client.connect(1337, '127.0.0.1', function() {
+								//	console.log('Connected');
+								//	client.write('Hello, server! Love, Client.');
+								//});
+
 							} else {
 								processEvent(event);
 							} 
