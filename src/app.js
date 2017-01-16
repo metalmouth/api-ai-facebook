@@ -161,6 +161,46 @@ function sendFBMessage(sender, messageData, callback) {
     });
 }
 
+function sendGenericMessage(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Orangehill",
+                    "subtitle": "Software solutions",
+                    "image_url": "http://orangehilltech.com/img/logo.png",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.orangehilltech.com",
+                        "title": "web url"
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.8/me/messages',
+        qs: {access_token: FB_PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
 function sendFBSenderAction(sender, action, callback) {
     setTimeout(() => {
         request({
@@ -239,8 +279,9 @@ app.post('/webhook/', (req, res) => {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
 							
-							if (event.message.text == 'adi' || event.message.text == 'Adi') {
+							if (event.message.text == 'orangehill' || event.message.text == 'Orangehill') {
 								sendTextMessage(event.sender.id, "SUCCESS");
+								sendGenericMessage(event.sender.id);
 								
 								//client.connect(1337, '127.0.0.1', function() {
 								//	console.log('Connected');
