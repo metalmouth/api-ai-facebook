@@ -173,7 +173,7 @@ function sendGenericMessage(sender) {
                     "image_url": "http://orangehilltech.com/img/logo.png",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.orangehilltech.com",
+                        "url": "http://www.orangehilltech.com",
                         "title": "Web Url"
                     }],
                 }]
@@ -283,7 +283,6 @@ app.post('/webhook/', (req, res) => {
 								//	console.log('Connected');
 								//	client.write('Hello, server! Love, Client.');
 								//});
-
 							} else {
 								processEvent(event);
 							} 
