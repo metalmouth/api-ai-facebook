@@ -34,10 +34,6 @@ function processEvent(event) {
             {
                 sessionId: sessionIds.get(sender)
             });
-
-		if (text === 'adi' || text === 'Adi') {
-            sendFBMessage(sender, "Pogi");
-        } 
 		
         apiaiRequest.on('response', (response) => {
             if (isDefined(response.result)) {
@@ -49,7 +45,7 @@ function processEvent(event) {
                     if (!Array.isArray(responseData.facebook)) {
                         try {
                             console.log('Response as formatted message');
-                            sendFBMessage(sender, responseData.facebook+'Adi');
+                            sendFBMessage(sender, responseData.facebook);
                         } catch (err) {
                             sendFBMessage(sender, {text: err.message});
                         }
@@ -223,7 +219,12 @@ app.post('/webhook/', (req, res) => {
                     messaging_events.forEach((event) => {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
-                            processEvent(event);
+							
+							if (text === 'adi' || text === 'Adi') {
+								sendFBMessage(sender, "SUCCESS");
+							} else {
+								processEvent(event);
+							} 
                         }
                     });
                 }
