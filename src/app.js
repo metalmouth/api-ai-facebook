@@ -31,7 +31,7 @@ function processEvent(event) {
         console.log("Text", text);
 		
 		if (text === 'adi' || text === 'Adi') {
-            sendFBMessage(sender, "Pogi")
+            sendFBMessage(sender, "Pogi");
             continue
         } 
 		
