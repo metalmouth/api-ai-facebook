@@ -220,7 +220,7 @@ app.post('/webhook/', (req, res) => {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
 							
-							if (text === 'adi' || text === 'Adi') {
+							if (event.message.text === 'adi' || event.message.text === 'Adi') {
 								sendFBMessage(event.sender.id, "SUCCESS");
 							} else {
 								processEvent(event);
