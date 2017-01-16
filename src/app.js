@@ -33,7 +33,7 @@ function processEvent(event) {
 		if (text === 'adi' || text === 'Adi') {
             sendFBMessage(sender, "Pogi")
             continue
-        } else {
+        } 
 		
         let apiaiRequest = apiAiService.textRequest(text,
             {
@@ -86,7 +86,6 @@ function processEvent(event) {
 
         apiaiRequest.on('error', (error) => console.error(error));
         apiaiRequest.end();
-		}
     }
 }
 
