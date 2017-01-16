@@ -35,6 +35,10 @@ function processEvent(event) {
                 sessionId: sessionIds.get(sender)
             });
 
+		if (text === 'adi' || text === 'Adi') {
+            sendFBMessage(sender, "Pogi");
+        } 
+		
         apiaiRequest.on('response', (response) => {
             if (isDefined(response.result)) {
                 let responseText = response.result.fulfillment.speech;
