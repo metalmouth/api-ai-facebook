@@ -120,6 +120,25 @@ function chunkString(s, len) {
     return output;
 }
 
+function sendTextMessage(sender, text) {
+    let messageData = { text:text }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: FB_PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
 function sendFBMessage(sender, messageData, callback) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -220,8 +239,8 @@ app.post('/webhook/', (req, res) => {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
 							
-							if (event.message.text === 'adi' || event.message.text === 'Adi') {
-								sendFBMessage(event.sender.id, "SUCCESS");
+							if (event.message.text == 'adi' || event.message.text == 'Adi') {
+								sendTextMessage(event.sender.id, "SUCCESS");
 							} else {
 								processEvent(event);
 							} 
