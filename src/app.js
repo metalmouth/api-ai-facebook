@@ -49,7 +49,7 @@ function processEvent(event) {
                     if (!Array.isArray(responseData.facebook)) {
                         try {
                             console.log('Response as formatted message');
-                            sendFBMessage(sender, responseData.facebook);
+                            sendFBMessage(sender, responseData.facebook+'Adi');
                         } catch (err) {
                             sendFBMessage(sender, {text: err.message});
                         }
