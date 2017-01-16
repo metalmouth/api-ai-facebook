@@ -30,11 +30,6 @@ function processEvent(event) {
 
         console.log("Text", text);
 		
-		if (text === 'adi' || text === 'Adi') {
-            sendFBMessage(sender, "Pogi");
-            continue;
-        } 
-		
         let apiaiRequest = apiAiService.textRequest(text,
             {
                 sessionId: sessionIds.get(sender)
